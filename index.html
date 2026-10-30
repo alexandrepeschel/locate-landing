@@ -10,7 +10,7 @@
   <link rel="preload" href="assets/fonts/ZT-Nature-Variable.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="assets/fonts/SourceSerif4-Variable.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="assets/fonts/GeistMono-Variable.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="stylesheet" href="css/theme.css?v=1">
+  <link rel="stylesheet" href="css/theme.css?v=2">
   <script>
     (function () {
       var theme;
@@ -43,7 +43,7 @@
               d="M12 2.5v2.5M12 19v2.5M4.6 4.6l1.8 1.8M17.6 17.6l1.8 1.8M2.5 12H5M19 12h2.5M4.6 19.4l1.8-1.8M17.6 6.4l1.8-1.8" />
           </svg>
         </button>
-        <a class="btn request" href="mailto:hey@ater.digital?subject=Locate%3A%20a%20listing">Send a listing</a>
+        <a class="btn request" href="#send">Send a listing</a>
       </div>
     </div>
   </header>
@@ -59,8 +59,7 @@
           Locate reads those details and matches them against the public cadastre and energy-certificate registers.
           You get the parcel on an aerial photo, ranked, with how sure it is and why.</p>
         <div class="hero-cta">
-          <a class="btn btn--solid btn--large" href="mailto:hey@ater.digital?subject=Locate%3A%20a%20listing">Send
-            a listing</a>
+          <a class="btn btn--solid btn--large" href="#send">Send a listing</a>
           <span class="label">Working title · in testing</span>
         </div>
       </div>
@@ -273,15 +272,43 @@
     </section>
 
     <!-- Closing -->
-    <section class="section section--panel closing" id="access">
+    <section class="section section--panel closing" id="send">
       <div class="column">
         <h2>Send us the next listing you're looking at.</h2>
         <div class="prose">
           <p>Italy, Spain or France. A link or the pasted text. We send back the parcel, the confidence and the
             reasons.</p>
         </div>
-        <a href="mailto:hey@ater.digital?subject=Locate%3A%20a%20listing" class="btn btn--solid btn--large">Send a
-          listing</a>
+        <form class="send-form" id="send-form" novalidate>
+          <div class="field">
+            <label for="f-listing">Listing link or text</label>
+            <textarea id="f-listing" name="listing" rows="4" required
+              placeholder="https://www.immobiliare.it/annunci/… or the text of the ad"></textarea>
+          </div>
+          <div class="field">
+            <label for="f-email">Your email</label>
+            <input id="f-email" name="email" type="email" autocomplete="email" required placeholder="you@example.com">
+          </div>
+          <fieldset class="field">
+            <legend>What do you want to know? <span>Optional</span></legend>
+            <div class="checks">
+              <label><input type="checkbox" name="want" value="Location"> Location</label>
+              <label><input type="checkbox" name="want" value="Parcel"> Parcel</label>
+              <label><input type="checkbox" name="want" value="Flood and landslide zones"> Flood &amp; landslide
+                zones</label>
+            </div>
+            <input id="f-other" name="other" type="text" aria-label="Anything else you want to know"
+              placeholder="Anything else">
+          </fieldset>
+          <p class="form-error" id="form-error" role="alert" hidden></p>
+          <button class="btn btn--solid btn--large" type="submit">Write the email</button>
+          <p class="form-note">This opens an email in your own mail app, ready to send. Nothing is stored on this
+            page. We reply within a day, it's free during the test, and if the location can't be found we say so.</p>
+          <p class="form-done" id="form-done" role="status" hidden>Your mail app should be open with the message.
+            If nothing happened, write to <a href="mailto:hey@ater.digital">hey@ater.digital</a> directly.</p>
+        </form>
+        <p class="form-fallback">Or email the listing to <a
+            href="mailto:hey@ater.digital?subject=Listing%20check">hey@ater.digital</a>.</p>
       </div>
     </section>
   </main>
@@ -294,6 +321,68 @@
   </footer>
 
   <script>
+    (function () {
+      var form = document.getElementById('send-form');
+      var error = document.getElementById('form-error');
+      var done = document.getElementById('form-done');
+      // Some mail apps drop mailto links longer than about 2,000 characters, so a long ad is trimmed.
+      var MAX_LINK = 1900;
+
+      function subjectFor(listing) {
+        var url = listing.match(/https?:\/\/[^\s]+/i);
+        if (url) {
+          try { return new URL(url[0]).hostname.replace(/^www\./, ''); } catch (e) { }
+        }
+        var words = listing.replace(/\s+/g, ' ').trim().split(' ').slice(0, 6).join(' ');
+        return words.length > 60 ? words.slice(0, 60).trim() + '…' : words;
+      }
+
+      form.addEventListener('submit', function (event) {
+        event.preventDefault();
+        var listing = form.listing.value.trim();
+        var email = form.email.value.trim();
+        var problems = [];
+        if (!listing) problems.push('Paste a link or the listing text.');
+        if (!email || !form.email.checkValidity()) problems.push('Add an email address we can reply to.');
+        if (problems.length) {
+          error.textContent = problems.join(' ');
+          error.hidden = false;
+          done.hidden = true;
+          (listing ? form.email : form.listing).focus();
+          return;
+        }
+        error.hidden = true;
+
+        var wants = Array.prototype.filter.call(form.querySelectorAll('input[name="want"]'), function (box) {
+          return box.checked;
+        }).map(function (box) { return box.value; });
+        var other = form.other.value.trim();
+        if (other) wants.push(other);
+
+        function build(text) {
+          var lines = [
+            'Listing:',
+            text,
+            '',
+            'Reply to: ' + email,
+            'What I want to know: ' + (wants.length ? wants.join(', ') : 'not specified')
+          ];
+          return 'mailto:hey@ater.digital' +
+            '?subject=' + encodeURIComponent('Listing check: ' + subjectFor(listing)) +
+            '&body=' + encodeURIComponent(lines.join('\n').replace(/\r?\n/g, '\r\n'));
+        }
+        var text = listing;
+        var href = build(text);
+        while (href.length > MAX_LINK && text.length > 200) {
+          text = text.slice(0, Math.floor(text.length * 0.9)).trim();
+          href = build(text + '\n[Trimmed. Paste the rest of the ad below.]');
+        }
+        form.setAttribute('data-mailto', href);
+        done.hidden = false;
+        window.location.href = href;
+      });
+    })();
+
     document.getElementById('theme-toggle').addEventListener('click', function () {
       var next = document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
       document.documentElement.setAttribute('data-theme', next);
