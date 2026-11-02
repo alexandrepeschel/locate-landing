@@ -106,7 +106,7 @@ body {
   font-weight: 400;
   line-height: 1.7;
   -webkit-font-smoothing: antialiased;
-  font-variant-ligatures: no-common-ligatures;
+  text-rendering: geometricPrecision;
 }
 
 a {
