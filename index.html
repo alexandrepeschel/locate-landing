@@ -4,13 +4,13 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Locate: paste a listing, get the parcel</title>
+  <title>Locate: send an Italian listing, get the exact address</title>
   <meta name="description"
-    content="Property listings in Italy, Spain and France hide the address. Paste the listing and get the cadastral parcel or building it describes, ranked, with a confidence level and the reasons.">
+    content="Italian property listings hide the address. Send us the listing and within a day we send back the exact location: the address, a pin on the map and how sure we are.">
   <link rel="preload" href="assets/fonts/ZT-Nature-Variable.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="assets/fonts/SourceSerif4-Variable.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="assets/fonts/GeistMono-Variable.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="stylesheet" href="css/theme.css?v=2">
+  <link rel="stylesheet" href="css/theme.css?v=3">
   <script>
     (function () {
       var theme;
@@ -29,7 +29,7 @@
       <a class="nav-path" href="#top" aria-label="Locate home">
         <span class="brand">Locate</span>
         <span class="nav-sep" aria-hidden="true">/</span>
-        <span>listing to parcel</span>
+        <span>Italian listings</span>
       </a>
       <div class="actions">
         <button class="theme-toggle" id="theme-toggle" type="button" aria-label="Toggle dark mode"
@@ -52,12 +52,11 @@
     <!-- Hero -->
     <section class="hero">
       <div class="column">
-        <p class="label">For listings that hide the address</p>
-        <h1>Paste a listing.<br><span>Get the parcel.</span></h1>
-        <p class="lede">Portals in Italy, Spain and France leave out the address, or blur the pin across half a
-          kilometre. The listing still gives the house away: the plot size, the floor area, the energy certificate.
-          Locate reads those details and matches them against the public cadastre and energy-certificate registers.
-          You get the parcel on an aerial photo, ranked, with how sure it is and why.</p>
+        <p class="label">For Italian listings that hide the address</p>
+        <h1>Send a listing.<br><span>Get the address.</span></h1>
+        <p class="lede">Italian property ads leave out the address, or show a map pin hundreds of metres off. Send us
+          the listing. Within a day we send back the exact location: the address, a pin on the map, and how sure we
+          are.</p>
         <div class="hero-cta">
           <a class="btn btn--solid btn--large" href="#send">Send a listing</a>
           <span class="label">Working title · in testing</span>
@@ -65,219 +64,148 @@
       </div>
     </section>
 
+    <!-- Product mock, in the contextual.cc interface style Umbra uses. Drawn, not a screenshot. -->
     <div class="hero-shot">
-      <figure class="shot">
-        <img src="assets/img/app-gravedona.webp" width="1400" height="660"
-          alt="The app with a villa listing from Gravedona ed Uniti pasted in. The fields it read out are on the left; on the right, an aerial photo with cadastral outlines and the top-ranked parcel, 692, marked, above a table of candidates.">
-        <figcaption><span class="label">Gravedona ed Uniti</span>A villa listing with no address and no pin, only the
-          street and “garden of about 1,840 m²”. First result: parcel 692, 1,835 m², high confidence.</figcaption>
-      </figure>
+      <div class="mock" role="img"
+        aria-label="A sketch of the tool. On the left, a link to an Italian listing goes in. On the right, a result card comes back with the street, a small map with one plot and a pin marked, and high confidence.">
+        <section class="mock-pane mock-pane--in" aria-hidden="true">
+          <div class="mock-spine"><span class="mock-spine-rule"></span><span class="mock-title">Listing</span></div>
+          <div class="mock-body">
+            <span class="mock-kicker">You send</span>
+            <div class="mock-link">
+              <svg viewBox="0 0 24 24"><path d="M10 14a4 4 0 0 0 6 0l3-3a4 4 0 0 0-6-6l-1 1M14 10a4 4 0 0 0-6 0l-3 3a4 4 0 0 0 6 6l1-1" /></svg>
+              <span>idealista.it/immobile/…</span>
+            </div>
+            <ul class="mock-lines">
+              <li><i style="width: 82%"></i></li>
+              <li><i style="width: 64%"></i></li>
+              <li><i style="width: 73%"></i></li>
+            </ul>
+            <span class="mock-chip">No address, no pin</span>
+          </div>
+        </section>
+        <section class="mock-pane mock-pane--out" aria-hidden="true">
+          <div class="mock-spine"><span class="mock-spine-rule"></span><span class="mock-title">Location</span></div>
+          <div class="mock-body">
+            <span class="mock-kicker mock-kicker--accent">Back within a day</span>
+            <p class="mock-address">Via Molo Vecchio</p>
+            <p class="mock-town">Gravedona ed Uniti, Como</p>
+            <svg class="mock-map" viewBox="0 0 400 170" preserveAspectRatio="xMidYMid slice">
+              <g class="mock-plots">
+                <path d="M-5 20 L88 8 L104 74 L-5 92 Z" />
+                <path d="M88 8 L186 -6 L196 58 L104 74 Z" />
+                <path d="M196 58 L186 -6 L300 -6 L306 42 Z" />
+                <path d="M306 42 L300 -6 L405 -6 L405 30 Z" />
+                <path d="M-5 112 L108 92 L120 178 L-5 178 Z" />
+                <path d="M222 78 L322 62 L334 138 L236 154 Z" class="mock-plot-found" />
+                <path d="M322 62 L405 50 L405 124 L334 138 Z" />
+                <path d="M120 178 L108 92 L208 80 L222 178 Z" />
+                <path d="M236 154 L334 138 L342 178 L240 178 Z" />
+              </g>
+              <path class="mock-street" d="M-5 102 C 80 88, 150 78, 212 68 S 340 44, 405 38" />
+              <g class="mock-pin" transform="translate(278 108)">
+                <circle r="15" class="mock-pin-halo" />
+                <circle r="4.5" class="mock-pin-dot" />
+              </g>
+            </svg>
+            <div class="mock-confidence">
+              <span class="mock-dots"><i class="on"></i><i class="on"></i><i class="on"></i></span>
+              <span>High confidence</span>
+            </div>
+          </div>
+        </section>
+      </div>
     </div>
 
     <!-- How it works -->
     <section class="section section--panel">
       <div class="column">
         <p class="label">How it works</p>
-        <h2>Three steps, from listing to parcel.</h2>
+        <h2>Three steps, one answer.</h2>
         <ol class="steps">
           <li>
             <div>
-              <h3>Paste the listing.</h3>
-              <p>A link, or the listing text. Some portals refuse automated requests; when that happens it says so
-                and asks for the text instead.</p>
+              <h3>Send the listing.</h3>
+              <p>A link, or the text of the ad.</p>
             </div>
           </li>
           <li>
             <div>
-              <h3>Check what it read.</h3>
-              <p>Town, street, plot and garden size, floor area, energy class and consumption, year, floor, and any
-                map pins from the portals. You correct a field before it searches, not after.</p>
+              <h3>We match it to the public records.</h3>
+              <p>An ad gives the house away: the garden size, the floor area, the energy figure. We check those
+                details against Italy's public land registry and energy certificates.</p>
             </div>
           </li>
           <li>
             <div>
-              <h3>Get ranked parcels.</h3>
-              <p>Each candidate comes with its cadastral reference, area, distance from the listing's location, a
-                confidence level and the reasons behind it, on an aerial photo with the cadastre outlines. A
-                candidate is marked high only when it is clearly ahead of the next one. When two independent sources
-                name the same parcel, that counts in its favour.</p>
+              <h3>You get the location within a day.</h3>
+              <p>The address, a pin on the map, and a confidence level: high, medium or low. If we can't find it, we
+                say so.</p>
             </div>
           </li>
         </ol>
       </div>
     </section>
 
-    <!-- Proof -->
+    <!-- Before and after -->
     <section class="section">
       <div class="column">
-        <p class="label">Test results, 30 October 2026</p>
-        <h2>Eight real listings. Seven found first.</h2>
-        <div class="prose">
-          <p>Five cases had an answer worked out by hand beforehand. On the three live listings, the check is that
-            independent records agree with each other and with the ad. The miss is listed too.</p>
-        </div>
-        <div class="tally">
-          <div><b>7 of 8</b><span>listings with the right parcel or building ranked first</span></div>
-          <div><b>3 countries</b><span>Italy, Spain and France, each from its own public registers</span></div>
-          <div><b>17–55 s</b><span>for a first house search in a new area; certificate lookups take seconds</span></div>
-        </div>
-
-        <div class="cases">
-          <div class="case">
-            <div class="case-where"><b>Gravedona ed Uniti</b><span class="label">Lombardy · villa</span></div>
-            <p>Street and “garden of about 1,840 m²”, no pin. <strong>Parcel 692, 1,835 m²</strong>, the answer
-              found by hand. Every other candidate scored low.</p>
-            <span class="verdict">#1 · high</span>
+        <p class="label">The alternative</p>
+        <h2>One link, not a trip to Italy.</h2>
+        <div class="contrast">
+          <div class="them">
+            <span class="label">Without us</span>
+            <b class="contrast-figure">Days, or a flight</b>
+            <p>Calls and emails to the agency, if they answer. Agencies often keep the address back until the viewing,
+              so you book a trip to find out where the house is.</p>
           </div>
-          <div class="case">
-            <div class="case-where"><b>Longone al Segrino</b><span class="label">Lombardy · villa</span></div>
-            <p>“Park of 3,300 m²” and a portal pin. <strong>Parcel 1466, 3,258 m²</strong>, which wraps parcel 581:
-              the known answer.</p>
-            <span class="verdict">#1 · high</span>
+          <div class="us">
+            <span class="label">With us</span>
+            <b class="contrast-figure">Within a day</b>
+            <p>One link sent. You know where the house is before you call anyone or book anything. Free during the
+              test.</p>
           </div>
-          <div class="case">
-            <div class="case-where"><b>Varese, Bobbiate</b><span class="label">Lombardy · flat</span></div>
-            <p>Class F, 319.11 kWh/m² a year. <strong>One energy certificate with exactly that figure, on the
-                listing's street</strong>, and the cadastral parcel under its address.</p>
-            <span class="verdict">#1 · high</span>
-          </div>
-          <div class="case">
-            <div class="case-where"><b>Bricherasio</b><span class="label">Piedmont · flat</span></div>
-            <p>A live TrovaCasa listing. <strong>The certificate with the exact consumption figure</strong>, which
-              names the foglio, particella and subalterno itself. Half a second.</p>
-            <span class="verdict">#1 · high</span>
-          </div>
-          <div class="case">
-            <div class="case-where"><b>Roses</b><span class="label">Catalonia · chalet</span></div>
-            <p>A live pisos.com listing. <strong>The Catalan certificate register and the Spanish Catastro name the
-                same cadastral reference.</strong> Plot size alone would not have done it: more than 30 parcels of
-              that size lie within 500 m.</p>
-            <span class="verdict">#1 · high</span>
-          </div>
-          <div class="case">
-            <div class="case-where"><b>Pézenas</b><span class="label">France · house</span></div>
-            <p>A Bien'ici listing with its pin blurred over 500 m. <strong>A 290 m² parcel with a 158 m² house,
-                both as in the ad</strong>, 403 m from the centre of the blur.</p>
-            <span class="verdict">#1 · high</span>
-          </div>
-          <div class="case">
-            <div class="case-where"><b>Gravedona, pin only</b><span class="label">Lombardy · villa</span></div>
-            <p>The same villa from a map pin alone. <strong>The parcel under the pin is 692 again</strong>, and the
-              plot-size search names it too.</p>
-            <span class="verdict">#1 · high</span>
-          </div>
-          <div class="case">
-            <div class="case-where"><b>Schignano</b><span class="label">Lombardy · estate</span></div>
-            <p>About 53,000 m² spread over several parcels. A search for one parcel of that size cannot find it.
-              Joining neighbouring parcels by owner is the next source to add.</p>
-            <span class="verdict verdict--miss">Not found</span>
-          </div>
-        </div>
-      </div>
-
-      <div class="wide">
-        <div class="shots">
-          <figure class="shot">
-            <img src="assets/img/gravedona.webp" width="1012" height="648" loading="lazy"
-              alt="Aerial photo of Gravedona ed Uniti with cadastral outlines; parcel 692 is marked as the first result, 1,835 square metres, high.">
-            <figcaption>Gravedona: house, by plot size.</figcaption>
-          </figure>
-          <figure class="shot">
-            <img src="assets/img/longone.webp" width="1012" height="648" loading="lazy"
-              alt="Aerial photo of Longone al Segrino with cadastral outlines; parcel 1466 is marked as the first result, 3,258 square metres, high.">
-            <figcaption>Longone al Segrino: house, by plot size and pin.</figcaption>
-          </figure>
-          <figure class="shot">
-            <img src="assets/img/bobbiate.webp" width="1012" height="665" loading="lazy"
-              alt="Aerial photo of Varese with cadastral outlines; one building is marked from an energy certificate whose consumption matches the listing exactly, high.">
-            <figcaption>Varese: flat, by energy certificate.</figcaption>
-          </figure>
         </div>
       </div>
     </section>
 
-    <!-- Coverage -->
+    <!-- Worked example -->
     <section class="section section--panel">
       <div class="column">
-        <p class="label">Coverage</p>
-        <h2>Where it can find flats, and where only houses.</h2>
-        <div class="prose">
-          <p>Houses are found by plot size on the cadastre, wherever the cadastre is open. Flats need more: a public
-            register of energy certificates with an address, so the listing's consumption figure points to one
-            building. Only some regions publish one.</p>
-        </div>
-      </div>
-      <div class="wide">
-        <div class="coverage">
+        <p class="label">One real example</p>
+        <h2>A villa on Lake Como.</h2>
+        <dl class="example">
           <div>
-            <h3>Italy</h3>
-            <ul>
-              <li class="full"><strong>Lombardy</strong>Houses by plot size, flats by energy certificate.</li>
-              <li class="full"><strong>Piedmont</strong>Houses by plot size, flats by energy certificate. Its 774,736
-                certificates name the parcel directly.</li>
-              <li class="part"><strong>Liguria, Tuscany, Emilia-Romagna, Veneto, Valle d'Aosta</strong>No certificate data with an address. Houses by plot size only.</li>
-              <li class="part"><strong>Anywhere with a portal pin</strong>The parcel under the pin, checked against
-                the plot size.</li>
-            </ul>
+            <dt>The ad said</dt>
+            <dd>A villa in Gravedona ed Uniti, on Via Molo Vecchio, with no house number and a garden of about
+              1,840 m².</dd>
           </div>
           <div>
-            <h3>Spain</h3>
-            <ul>
-              <li class="full"><strong>Catalonia</strong>Energy certificates with the cadastral reference, checked
-                against the Catastro.</li>
-              <li class="part"><strong>Rest of Spain, except Navarra and the Basque Country</strong>Catastro address
-                and plot-size search. No certificate source yet.</li>
-            </ul>
+            <dt>We found</dt>
+            <dd>The house on the map: a land-registry plot of 1,835 m² on that street. No other plot within 400 m
+              comes within 10% of that size.</dd>
           </div>
           <div>
-            <h3>France</h3>
-            <ul>
-              <li class="full"><strong>Certificates since July 2021</strong>15.9 million energy certificates with
-                address, type and floor area, then the parcel from the national cadastre.</li>
-              <li class="part"><strong>Older certificates</strong>Not in this register yet, so those listings come
-                back without a strong match.</li>
-            </ul>
+            <dt>Confidence</dt>
+            <dd>High. A buyer's agent who had the answer confirmed it was the right house.</dd>
           </div>
-        </div>
-      </div>
-      <div class="column">
-        <p class="coverage-key">● houses and flats &nbsp; ○ houses only, or a weaker match</p>
-      </div>
-    </section>
-
-    <!-- Audience -->
-    <section class="section">
-      <div class="column">
-        <p class="label">Who it's for</p>
-        <h2>For people who look at other people's listings for a living.</h2>
-        <div class="prose">
-          <p>A client sends a link. The address is hidden, the pin is a circle, and the agent behind it is slow to
-            answer. You want to know which house it is before you spend a day on it.</p>
-        </div>
-        <ul class="audience">
-          <li><span><strong>Buyer's agents.</strong> Know the house, the plot and its neighbours before you book the
-              viewing.</span></li>
-          <li><span><strong>Property finders.</strong> Check a shortlist of listings against the map before you drive
-              to them.</span></li>
-          <li><span><strong>Relocation consultants.</strong> Tell a client where a listing actually sits: which
-              street, which side of town.</span></li>
-        </ul>
-        <div class="note limits">
+        </dl>
+        <div class="note">
           <span class="label">Honest limits</span>
-          <p>Estates spread over several parcels aren't found yet. In Piedmont, one of four live listings tested had
-            its certificate in the public data. Below “high”, check the result against the listing's photos. It
-            finds the parcel or building; it does not find the owner.</p>
+          <p>Some listings can't be found, and a result below “high” should be checked against the ad's photos.
+            Flats work only in Lombardy and Piedmont, where energy certificates are public, and we find the building,
+            not the flat. We don't look up the owner.</p>
         </div>
       </div>
     </section>
 
     <!-- Closing -->
-    <section class="section section--panel closing" id="send">
+    <section class="section closing" id="send">
       <div class="column">
-        <h2>Send us the next listing you're looking at.</h2>
+        <h2>Send us the listing you're looking at.</h2>
         <div class="prose">
-          <p>Italy, Spain or France. A link or the pasted text. We send back the parcel, the confidence and the
-            reasons.</p>
+          <p>Any Italian listing. A link or the text of the ad. We send back the address, a pin on the map and how
+            sure we are.</p>
         </div>
         <form class="send-form" id="send-form" novalidate>
           <div class="field">
@@ -289,17 +217,6 @@
             <label for="f-email">Your email</label>
             <input id="f-email" name="email" type="email" autocomplete="email" required placeholder="you@example.com">
           </div>
-          <fieldset class="field">
-            <legend>What do you want to know? <span>Optional</span></legend>
-            <div class="checks">
-              <label><input type="checkbox" name="want" value="Location"> Location</label>
-              <label><input type="checkbox" name="want" value="Parcel"> Parcel</label>
-              <label><input type="checkbox" name="want" value="Flood and landslide zones"> Flood &amp; landslide
-                zones</label>
-            </div>
-            <input id="f-other" name="other" type="text" aria-label="Anything else you want to know"
-              placeholder="Anything else">
-          </fieldset>
           <p class="form-error" id="form-error" role="alert" hidden></p>
           <button class="btn btn--solid btn--large" type="submit">Write the email</button>
           <p class="form-note">This opens an email in your own mail app, ready to send. Nothing is stored on this
@@ -316,7 +233,7 @@
   <footer class="site-foot">
     <div class="site-foot-inner">
       <span class="brand">Locate</span>
-      <span class="label">Cadastre © Agenzia delle Entrate, Catastro, IGN · imagery © Esri</span>
+      <span class="label">Land registry data © Agenzia delle Entrate</span>
     </div>
   </footer>
 
@@ -353,19 +270,12 @@
         }
         error.hidden = true;
 
-        var wants = Array.prototype.filter.call(form.querySelectorAll('input[name="want"]'), function (box) {
-          return box.checked;
-        }).map(function (box) { return box.value; });
-        var other = form.other.value.trim();
-        if (other) wants.push(other);
-
         function build(text) {
           var lines = [
             'Listing:',
             text,
             '',
-            'Reply to: ' + email,
-            'What I want to know: ' + (wants.length ? wants.join(', ') : 'not specified')
+            'Reply to: ' + email
           ];
           return 'mailto:hey@ater.digital' +
             '?subject=' + encodeURIComponent('Listing check: ' + subjectFor(listing)) +
